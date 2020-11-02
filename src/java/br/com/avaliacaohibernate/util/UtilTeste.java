@@ -64,4 +64,12 @@ public class UtilTeste {
     public static String gerarDescricao() {
         return gerarCaracter(15);
     }
+    
+    public static String gerarProfissao() {
+        return "Profissao " + gerarCaracter(5);
+    }
+    
+    public static String gerarDescProfissao() {
+        return gerarCaracter(10);
+    }
 }

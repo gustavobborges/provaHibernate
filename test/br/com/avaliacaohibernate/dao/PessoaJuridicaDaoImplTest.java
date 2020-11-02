@@ -32,7 +32,7 @@ public class PessoaJuridicaDaoImplTest {
         pessoaJuridicaDao = new PessoaJuridicaDaoImpl();
     }
     
-//    @Test
+    @Test
     public void testSalvar() {
         System.out.println("salvar");
         pessoaJuridica = new PessoaJuridica(null,
@@ -43,7 +43,7 @@ public class PessoaJuridicaDaoImplTest {
         );              
 
         List<Cartao> cartoes = new ArrayList<>();
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 1; i++) {
             cartoes.add(criarCartao());
         }
         
@@ -59,38 +59,39 @@ public class PessoaJuridicaDaoImplTest {
         assertNotNull(pessoaJuridica.getCartoes().get(0).getId());
     }
     
-        private Cartao criarCartao() {
+    private Cartao criarCartao() {
         Cartao cartao = new Cartao(null,
                 UtilTeste.gerarNumeroCartao(),
                 "Visa",
                 "01/2021"
         );
-        return cartao;
+    return cartao;
     }
 
    @Test
     public void testAlterar() {
         System.out.println("alterar");
         buscarPessoaJuridicaBD();
-        pessoaJuridica.setNome(UtilTeste.gerarCaracter(5));
-        pessoaJuridica.getEndereco().setLogradouro("Av. " + UtilTeste.gerarCaracter(5));
-        pessoaJuridica.getTelefones().get(0).setNumero(UtilTeste.gerarTelefone());
+        pessoaJuridica.setNome("NomeAlt " + UtilTeste.gerarNome());
+        pessoaJuridica.setEmail("alt" + UtilTeste.gerarEmail());
+        pessoaJuridica.setCnpj(UtilTeste.gerarCnpj());
+        pessoaJuridica.setInscricaoEstadual(UtilTeste.gerarInscricao());
+        pessoaJuridica.getCartoes().get(0).setNumero(UtilTeste.gerarNumeroCartao());
         
         session = HibernateUtil.abrirSessao();
         pessoaJuridicaDao.salvarOuAlterar(pessoaJuridica, session);
         
         PessoaJuridica pessoaJuridicaAlterado = pessoaJuridicaDao.pesquisarPorId(pessoaJuridica.getId(), session);
-        Telefone telefone = pessoaJuridicaAlterado.getTelefones().get(0);
+        Cartao cartao = pessoaJuridicaAlterado.getCartoes().get(0);
         session.close();
         
         assertEquals(pessoaJuridica.getNome(), pessoaJuridicaAlterado.getNome());
-        assertEquals(pessoaJuridica.getEndereco().getLogradouro(), pessoaJuridicaAlterado.getEndereco().getLogradouro());
-        assertEquals(pessoaJuridica.getTelefones().get(0).getNumero(), telefone.getNumero());
+        assertEquals(pessoaJuridica.getCartoes().get(0).getNumero(), cartao.getNumero());
      }
     
-//    @Test
+    @Test
     public void testExcluir() {
-        System.out.println("Escluir");
+        System.out.println("Exluir");
         buscarPessoaJuridicaBD();
         session = HibernateUtil.abrirSessao();
         pessoaJuridicaDao.remover(pessoaJuridica, session);
@@ -102,7 +103,7 @@ public class PessoaJuridicaDaoImplTest {
     @Test
     public void testPesquisarPorNome() {
         System.out.println("pesquisarPorNome");
-         buscarPessoaJuridicaBD();
+        buscarPessoaJuridicaBD();
         session = HibernateUtil.abrirSessao();
         List<PessoaJuridica> pessoasJuridicas = pessoaJuridicaDao.pesquisarPorNome(pessoaJuridica.getNome(), session);
         assertTrue(pessoasJuridicas.size() > 0);

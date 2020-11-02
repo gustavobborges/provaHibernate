@@ -11,9 +11,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -33,8 +30,7 @@ public class Profissao implements Serializable {
     private String nome;
     @Column(nullable = false)
     private String descricao;
-        
-    
+            
     public Long getId() {
         return id;
     }
@@ -67,6 +63,7 @@ public class Profissao implements Serializable {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+    
 
     @Override
     public int hashCode() {

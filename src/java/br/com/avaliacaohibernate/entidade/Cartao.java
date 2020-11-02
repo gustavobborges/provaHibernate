@@ -28,7 +28,7 @@ public class Cartao implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @Column(nullable = false)
-    private String nome;
+    private String numero;
     @Column(nullable = false)
     private String bandeira;
     @Column(nullable = false)
@@ -41,9 +41,9 @@ public class Cartao implements Serializable {
     public Cartao() {
     }
 
-    public Cartao(Long id, String nome, String bandeira, String validade) {
+    public Cartao(Long id, String numero, String bandeira, String validade) {
         this.id = id;
-        this.nome = nome;
+        this.numero = numero;
         this.bandeira = bandeira;
         this.validade = validade;
     }
@@ -56,12 +56,12 @@ public class Cartao implements Serializable {
         this.id = id;
     }
 
-    public String getNome() {
-        return nome;
+    public String getNumero() {
+        return numero;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNumero(String numero) {
+        this.numero = numero;
     }
 
     public String getBandeira() {
